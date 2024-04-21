@@ -24,9 +24,6 @@ int main()
 
     nResult = 1;
 Exit0:
-    if (!nResult)
-    {
-        m_EventThread.stop();
-    }
+    m_EventThread.stop();
     return nResult;
 }

@@ -32,9 +32,6 @@
     <ClInclude Include="CS_Protocol.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="event_thread.h">
       <Filter>头文件</Filter>
     </ClInclude>

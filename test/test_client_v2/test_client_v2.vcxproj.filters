@@ -21,9 +21,18 @@
     <ClCompile Include="TcpClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="event_thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TcpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="event_thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CS_Protocol.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

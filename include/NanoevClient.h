@@ -115,6 +115,9 @@ static int WriteToBuf(nanoev_client* pClient, const unsigned char* pszMsg)
         pClient->nOutBufCapacity = nRequiredCapacity;
     }
 
+    *((unsigned int*)pClient->pszOutBuf) = nLen;
+    pClient->nOutBufSize = sizeof(unsigned int);
+
     memcpy(pClient->pszOutBuf + pClient->nOutBufSize, pszMsg, nLen);
     pClient->nOutBufSize += nLen;
 

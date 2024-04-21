@@ -92,9 +92,9 @@ Exit0:
 
 void TcpServer::OnAccept(nanoev_event* pServerCon, nanoev_event* pNewClientConn)
 {
-    int            nRetCode = 0;
-    unsigned short nPort = 0;
-    nanoev_client* pClient = NULL;
+    int            nRetCode          = 0;
+    unsigned short nPort             = 0;
+    nanoev_client* pClient           = NULL;
     char           szClientIP[46];
     nanoev_addr    ClientAddr;
     nanoev_timeval TimeOut;
@@ -125,11 +125,11 @@ void TcpServer::OnAccept(nanoev_event* pServerCon, nanoev_event* pNewClientConn)
     nRetCode = nanoev_tcp_read(pNewClientConn, pClient->pszInBuf, pClient->nInBufCapacity, OnRead);
     LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
-    TimeOut.tv_sec = TIMEOUT_SECONDS;
-    TimeOut.tv_usec = 0;
-
-    //nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
-    //LOG_PROCESS_ERROR (nRetCode == NANOEV_SUCCESS);
+//     TimeOut.tv_sec = TIMEOUT_SECONDS;
+//     TimeOut.tv_usec = 0;
+// 
+//     nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
+//     LOG_PROCESS_ERROR (nRetCode == NANOEV_SUCCESS);
 
     pClient->nState = ecssRecv;
 
@@ -140,7 +140,7 @@ Exit0:
 void TcpServer::OnRead(nanoev_event* pClientConn, int nStatus, void* pBuf, unsigned int nBytes)
 {
     nanoev_client* pClient = NULL;
-    TcpServer* pSelf = NULL;
+    TcpServer*     pSelf   = NULL;
 
     LOG_PROCESS_ERROR(pClientConn);
 
@@ -178,14 +178,14 @@ void TcpServer::OnRead(nanoev_event* pClientConn, void* pBuf, unsigned int nByte
 
     pClient = (nanoev_client*)nanoev_event_userdata(pClientConn);
     LOG_PROCESS_ERROR(pClient);
-    //LOG_PROCESS_ERROR(pClient->nState == ecssRecv);
+    LOG_PROCESS_ERROR(pClient->nState == ecssRecv);
 
-    //nanoev_timer_del(pClient->pTimer);
+    nanoev_timer_del(pClient->pTimer);
 
-    printf("Read successful, content = %s", (char*)pBuf);
+    printf("Read successful, content = %s", (char*)pBuf + sizeof(unsigned int));
 
     pClient->nInBufSize += nBytes;
-    //nRemainSize = GetRemainSize(pClient);
+    nRemainSize = GetRemainSize(pClient);
 
     if (nRemainSize > 0)
     {
@@ -195,27 +195,28 @@ void TcpServer::OnRead(nanoev_event* pClientConn, void* pBuf, unsigned int nByte
         nRetCode = nanoev_tcp_read(pClientConn, pClient->pszInBuf + pClient->nInBufSize, nRemainSize, OnRead);
         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
-        TimeOut.tv_sec = TIMEOUT_SECONDS;
-        TimeOut.tv_usec = 0;
-
-        //nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
-        //LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
+//         TimeOut.tv_sec = TIMEOUT_SECONDS;
+//         TimeOut.tv_usec = 0;
+// 
+//         nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
+//         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
     }
     else
     {
         LOG_PROCESS_ERROR(pClient->pszInBuf);
         LOG_PROCESS_ERROR(pClient->nInBufSize);
+
         nRetCode = WriteToBuf(pClient, puszMsg);
         LOG_PROCESS_ERROR(nRetCode == 0);
 
         pClient->nOutBufSent = 0;
-        nRetCode = nanoev_tcp_write(pClientConn, puszMsg, pClient->nOutBufSize, OnWrite);
+        nRetCode = nanoev_tcp_write(pClientConn, pClient->pszOutBuf, pClient->nOutBufSize, OnWrite);
         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
-        TimeOut.tv_sec = TIMEOUT_SECONDS;
-        TimeOut.tv_usec = 0;
-        //nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
-        //LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
+//         TimeOut.tv_sec = TIMEOUT_SECONDS;
+//         TimeOut.tv_usec = 0;
+//         nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
+//         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
         pClient->nState = ecssSend;
     }
@@ -255,7 +256,7 @@ void TcpServer::OnWrite(nanoev_event* pClientConn, void* pBuf, unsigned int nByt
     pClient = (nanoev_client*)nanoev_event_userdata(pClientConn);
     LOG_PROCESS_ERROR(pClient->nState == ecssSend);
 
-    //nanoev_timer_del(pClient->pTimer);
+    nanoev_timer_del(pClient->pTimer);
 
     LOG_PROCESS_ERROR(nBytes);
 
@@ -269,10 +270,10 @@ void TcpServer::OnWrite(nanoev_event* pClientConn, void* pBuf, unsigned int nByt
         );
         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
-        TimeOut.tv_sec = TIMEOUT_SECONDS;
-        TimeOut.tv_usec = 0;
-        nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
-        LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
+//         TimeOut.tv_sec = TIMEOUT_SECONDS;
+//         TimeOut.tv_usec = 0;
+//         nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
+//         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
     }
     else
     {
@@ -283,10 +284,10 @@ void TcpServer::OnWrite(nanoev_event* pClientConn, void* pBuf, unsigned int nByt
         nRetCode = nanoev_tcp_read(pClientConn, pClient->pszInBuf, pClient->nInBufCapacity, OnRead);
         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
-        TimeOut.tv_sec = TIMEOUT_SECONDS;
-        TimeOut.tv_usec = 0;
-        //nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
-        //LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
+//         TimeOut.tv_sec = TIMEOUT_SECONDS;
+//         TimeOut.tv_usec = 0;
+//         nRetCode = nanoev_timer_add(pClient->pTimer, TimeOut, 0, OnTimer);
+//         LOG_PROCESS_ERROR(nRetCode == NANOEV_SUCCESS);
 
         pClient->nState = ecssRecv;
     }
@@ -309,7 +310,7 @@ void TcpServer::OnTimer(nanoev_event* pTimer)
 
 void* TcpServer::AllocUserData(void* pContext, void* pUserData)
 {
-    void* pResult       = NULL;
+    void*       pResult = NULL;
     GlobalData* pGlobal = (GlobalData*)pContext;
 
     LOG_PROCESS_ERROR(pGlobal);
