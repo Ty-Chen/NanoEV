@@ -26,6 +26,12 @@
     <ClInclude Include="..\include\nanoev.hpp">
       <Filter>Include Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\NanoevClient.h">
+      <Filter>Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\def.h">
+      <Filter>Include Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nanoev_loop.c">

@@ -1,0 +1,6 @@
+.vs
+bin
+Win32
+x64
+*.user
+Debug

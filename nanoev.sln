@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nanoev", "source\nanoev.vcxproj", "{6A273931-3EE1-4DE4-98C7-E5547B79E29B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_client", "test\test_client\test_client.vcxproj", "{2E27A887-6356-4FA3-8391-9DB135490EAF}"
@@ -17,6 +19,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "udp_test", "test\udp_test\u
 	ProjectSection(ProjectDependencies) = postProject
 		{6A273931-3EE1-4DE4-98C7-E5547B79E29B} = {6A273931-3EE1-4DE4-98C7-E5547B79E29B}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_client_v2", "test\test_client_v2\test_client_v2.vcxproj", "{6835DBDD-A02A-4FA0-B212-C406B822547B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_server_v2", "test\test_server_v2\test_server_v2.vcxproj", "{9F33E9F8-95BF-4238-996D-328E0DB93A9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,8 +82,35 @@ Global
 		{7A8072E1-62FA-4730-8628-4AF35CE3565A}.Release|Win32.Build.0 = Release|Win32
 		{7A8072E1-62FA-4730-8628-4AF35CE3565A}.Release|x64.ActiveCfg = Release|x64
 		{7A8072E1-62FA-4730-8628-4AF35CE3565A}.Release|x64.Build.0 = Release|x64
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Debug|Win32.Build.0 = Debug|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Debug|x64.ActiveCfg = Debug|x64
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Debug|x64.Build.0 = Debug|x64
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Release|Win32.ActiveCfg = Release|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Release|Win32.Build.0 = Release|Win32
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Release|x64.ActiveCfg = Release|x64
+		{6835DBDD-A02A-4FA0-B212-C406B822547B}.Release|x64.Build.0 = Release|x64
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Debug|Win32.Build.0 = Debug|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Debug|x64.ActiveCfg = Debug|x64
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Debug|x64.Build.0 = Debug|x64
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Release|Win32.ActiveCfg = Release|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Release|Win32.Build.0 = Release|Win32
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Release|x64.ActiveCfg = Release|x64
+		{9F33E9F8-95BF-4238-996D-328E0DB93A9C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A79FCDA8-4585-43AC-9057-33C66CEC95EB}
 	EndGlobalSection
 EndGlobal
